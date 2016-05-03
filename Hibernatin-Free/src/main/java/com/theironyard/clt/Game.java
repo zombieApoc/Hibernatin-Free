@@ -25,13 +25,17 @@ public class Game {
     @Column(nullable = false)
     int releaseYear;
 
+    @OneToMany
+    User user;
+
     public Game() {
     }
 
-    public Game(String name, String genre, String platform, int releaseYear) {
+    public Game(String name, String genre, String platform, int releaseYear, User user) {
         this.name = name;
         this.genre = genre;
         this.platform = platform;
         this.releaseYear = releaseYear;
+        this.user = user;
     }
 }

@@ -16,13 +16,13 @@ public class User {
     String userName;
 
     @Column(nullable = false)
-    String password;
+    String passwordHash;
 
     public User() {
     }
 
-    public User(String userName, String password) {
+    public User(String userName, String passwordHash) {
         this.userName = userName;
-        this.password = password;
+        this.passwordHash = passwordHash;
     }
 }
