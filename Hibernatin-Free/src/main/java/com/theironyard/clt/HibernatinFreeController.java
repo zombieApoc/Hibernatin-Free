@@ -1,7 +1,10 @@
 package com.theironyard.clt;
 
-/**
- * Created by Ultramar on 5/3/16.
- */
+
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class HibernatinFreeController {
+
+
 }
