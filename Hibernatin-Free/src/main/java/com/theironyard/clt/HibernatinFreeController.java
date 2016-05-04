@@ -28,7 +28,7 @@ public class HibernatinFreeController {
         Page<Game> gameList;
 
         String userName = (String) session.getAttribute("userName");
-        User user = users.findFirstByName(userName);
+        User user = users.findFirstByUserName(userName);
         if (user != null) {
             model.addAttribute("user", user);
         }
@@ -48,7 +48,7 @@ public class HibernatinFreeController {
     @RequestMapping(path = "/add-game", method = RequestMethod.POST)
     public String addGame(HttpSession session, String gameName, String gamePlatform, String gameGenre, int gameYear) {
         String userName = (String) session.getAttribute("userName");
-        User user = users.findFirstByName(userName);
+        User user = users.findFirstByUserName(userName);
         Game game = new Game(gameName, gamePlatform, gameGenre, gameYear, user);
         games.save(game);
         return "redirect:/";
@@ -56,7 +56,7 @@ public class HibernatinFreeController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(HttpSession session, String userName, String passwordHash) throws Exception {
-        User user = users.findFirstByName(userName);
+        User user = users.findFirstByUserName(userName);
         if (user == null) {
             user = new User(userName, PasswordStorage.createHash(passwordHash));
             users.save(user);
