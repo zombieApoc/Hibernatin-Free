@@ -25,7 +25,7 @@ public class Game {
     @Column(nullable = false)
     int releaseYear;
 
-    @OneToMany
+    @ManyToOne
     User user;
 
     public Game() {

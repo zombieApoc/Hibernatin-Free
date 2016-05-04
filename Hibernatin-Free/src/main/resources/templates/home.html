@@ -61,7 +61,10 @@ Welcome, {{name}}!
     </tr>
     {{/games}}
 </table>
-{{/users}}
+{{#showNext}}
+<a href="/?page={{nextPage}}{{#genre}}&category={{.}}{{/genre}}">Next</a>
+{{/showNext}}
+{{/user}}
 </body>
 </html>
 games
