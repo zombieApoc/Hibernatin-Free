@@ -2,6 +2,8 @@ package com.theironyard.clt;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +22,10 @@ public class HibernatinFreeController {
     UserRepository users;
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(HttpSession session, Model model, String genre, Integer releaseYear) {
-        Iterable<Game> gameList;
+    public String home(HttpSession session, Model model, String genre, Integer releaseYear, Integer page) {
+        page = (page == null) ? 0 : page;
+        PageRequest pr = new PageRequest(page, 10);
+        Page<Game> gameList;
 
         String userName = (String) session.getAttribute("userName");
         User user = users.findFirstByName(userName);
@@ -31,11 +35,11 @@ public class HibernatinFreeController {
 
 
         if (genre != null) {
-            gameList = games.findByGenre(genre);
+            gameList = games.findByGenre(pr, genre);
         } else if (releaseYear != null) {
-            gameList = games.findByReleaseYear(releaseYear);
+            gameList = games.findByReleaseYear(pr, releaseYear);
         } else {
-            gameList = games.findAll();
+            gameList = games.findAll(pr);
         }
         model.addAttribute("games", gameList);
         return "home";
