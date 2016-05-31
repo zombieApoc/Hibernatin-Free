@@ -49,7 +49,7 @@ public class HibernatinFreeController {
     public String addGame(HttpSession session, String gameName, String gamePlatform, String gameGenre, int gameYear) {
         String userName = (String) session.getAttribute("userName");
         User user = users.findFirstByUserName(userName);
-        Game game = new Game(gameName, gamePlatform, gameGenre, gameYear, user);
+        Game game = new Game(gameName, gameGenre, gamePlatform, gameYear, user);
         games.save(game);
         return "redirect:/";
     }
